@@ -1,35 +1,53 @@
-# OpenCode Mobile (Android)
+# OpenCode Mobile
 
-Cliente móvil de OpenCode con una interfaz de chat inspirada en aplicaciones modernas de asistentes. Está hecho con **React Native + Expo** y está preparado para Android Studio. Es un cliente para un servidor OpenCode que tú controles; no incluye ni suplanta Claude o ChatGPT.
+Cliente Android para OpenCode con una interfaz de chat moderna, pensada como una app móvil nativa para un backend de OpenCode.
 
-## Requisitos
+## Qué incluye
 
-- Node.js LTS y npm
-- Android Studio con Android SDK y un emulador o teléfono
-- Un servidor OpenCode activo y accesible desde el teléfono
+- Pantalla de configuración para URL, password y directorio del proyecto.
+- Conexión segura con SecureStore.
+- Listado de sesiones desde OpenCode.
+- Chat de usuario y asistente.
+- Generación de nuevas sesiones.
+- Soporte para app Android con Expo/React Native.
 
-## Abrir en Android Studio y generar el APK
+## Requisitos para compilar el APK
 
-1. Clona este repositorio y ejecuta `npm install`.
-2. Genera el proyecto nativo Android: `npx expo prebuild --platform android`.
-3. Abre la carpeta `android/` con Android Studio y espera a que Gradle sincronice.
-4. Para compilar desde Android Studio: **Build → Build Bundle(s) / APK(s) → Build APK(s)**. El APK de depuración aparece en `android/app/build/outputs/apk/debug/`.
+1. Instala Node.js LTS.
+2. Instala Android Studio con SDK de Android.
+3. Instala Expo CLI si lo necesitas.
+4. Ejecuta:
 
-También puedes compilar desde la terminal con `npx expo run:android`. Para distribuirlo, crea una versión firmada desde **Build → Generate Signed Bundle / APK**. No compartas la clave de firma.
+```bash
+npm install
+npx expo prebuild --platform android
+```
 
-## Conectar el teléfono
+5. Abre la carpeta `android` con Android Studio.
+6. Genera el APK desde **Build > Build APK(s)**.
 
-1. Inicia OpenCode en una computadora/servidor accesible en la misma red, por ejemplo `opencode serve --hostname 0.0.0.0 --port 4096`.
-2. En la app, usa una dirección como `http://192.168.1.20:4096` (la IP local del servidor), la contraseña si configuraste autenticación, y opcionalmente la ruta del proyecto en esa máquina.
-3. Mantén el servidor protegido; no lo expongas directamente a internet. Para conexiones fuera de tu red local, usa una VPN privada o un proxy HTTPS autenticado.
+## Cómo usarlo
 
-> En el emulador Android, `localhost` apunta al emulador; para acceder al servidor del computador anfitrión suele usarse `10.0.2.2`.
+1. Inicia OpenCode en tu PC o servidor.
+2. Desde la app, introduce algo como `http://192.168.1.20:4096` (o `http://10.0.2.2:4096` si usas un emulador).
+3. Si has configurado una contraseña, añádela también.
+4. Haz clic en **Guardar y abrir chat**.
+5. Crea una sesión o usa una existente y empieza a chatear.
 
-## Funciones incluidas
+> La app es un cliente móvil para un servidor OpenCode y no ejecuta el backend dentro del teléfono.
 
-- Configuración local segura de URL y contraseña con Android Keystore (Expo SecureStore).
-- Creación de sesiones y envío de mensajes al servidor OpenCode.
-- Conversación sencilla en español con estado de espera y mensajes de error.
-- Interfaz oscura adaptable, ejemplos de prompts y nuevo chat.
+## Estructura del proyecto
 
-Este es un punto de partida. La compilación de APK se realiza en Android Studio o en tu entorno local; no se ha generado un APK desde GitHub.
+- `App.tsx`: pantalla principal y flujo del chat.
+- `src/api.ts`: cliente para OpenCode.
+- `app.json`: configuración de Expo/Android.
+- `package.json`: dependencias del proyecto.
+
+## Seguridad
+
+- La URL, contraseña y directorio se guardan con `expo-secure-store`.
+- No se expone el servidor con autenticación débil en internet; usa VLAN/VPN o un proxy autenticado si necesitas acceso remoto.
+
+## Nota
+
+Este repositorio es un starter móvil para OpenCode. Es una base funcional para continuar desarrollándola y personalizarla como una app oficial de producto.
