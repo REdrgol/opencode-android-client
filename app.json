@@ -1,0 +1,18 @@
+{
+  "expo": {
+    "name": "OpenCode Mobile",
+    "slug": "opencode-mobile",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "android": {
+      "package": "com.redrgol.opencodemobile",
+      "versionCode": 1,
+      "permissions": ["INTERNET"]
+    },
+    "plugins": ["expo-secure-store"],
+    "extra": {
+      "description": "Chat client for your own OpenCode server"
+    }
+  }
+}
